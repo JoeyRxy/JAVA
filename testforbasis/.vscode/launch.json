@@ -1,0 +1,54 @@
+{
+    "configurations": [
+        {
+            "name": "cpp",
+            "preLaunchTask": "buildcpp",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.o",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CMDargs",
+            "request": "launch",
+            "mainClass": "basis.learn.CMDargs",
+            "projectName": "first"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": " \"C:\\Users\\29388\\Documents\\code\\Java\\testforbasis\\data\\testdata.txt\""
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RefPass",
+            "request": "launch",
+            "mainClass": "basis.learn.RefPass",
+            "projectName": "first"
+        },
+        {
+            "type": "java",
+            "name": "Launch",
+            "request": "launch",
+            "mainClass": "basis.learn.${fileBasenameNoExtension}",
+            "projectName": "first",
+            "console": "integratedTerminal"
+        }
+    ]
+}
