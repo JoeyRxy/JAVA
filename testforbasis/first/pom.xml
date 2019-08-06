@@ -26,11 +26,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>algs4</groupId>
-      <artifactId>algs4</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>C:\Users\29388\Documents\code\Java\algs4.jar</systemPath>
+      <groupId>edu.princeton.cs</groupId>
+      <artifactId>Algs4</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
