@@ -18,6 +18,12 @@ public class PropertyRead {
             System.out.println(property);
             String property2 = properties.getProperty("the");
             System.out.println(property2);
+            String rxy = properties.getProperty("rxy");
+            System.out.println(rxy);
+            properties.setProperty("the", "this is the properties");
+            properties.setProperty("rxy", "this is the rxy propterties");
+            properties.setProperty("shit", "this is the shit properties");
+            System.out.println(properties.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
