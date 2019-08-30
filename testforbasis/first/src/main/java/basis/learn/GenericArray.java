@@ -9,8 +9,8 @@ public class GenericArray<T> {
     private GenericArray<T>[] next;
 
     public GenericArray() {
-        val = 0;
-        next = new GenericArray<T>();
+        // val = 0;
+        // next = new GenericArray<T>();
     }
-    
+
 }
