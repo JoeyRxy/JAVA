@@ -11,7 +11,7 @@ import java.net.Socket;
 public class Server {
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(2000);
+        ServerSocket serverSocket = new ServerSocket(2019);// 指定进程端口
         // 服务器信息
         System.out.println("server waiting...");
         System.out.println("server info:" + serverSocket.getInetAddress() + "\tport:" + serverSocket.getLocalPort());
@@ -26,7 +26,7 @@ public class Server {
 
     }
 
-    private static class ClientHandler extends Thread {
+    private static class ClientHandler implements Runnable {
         private Socket socket;
         private boolean flag = false;
 
@@ -34,9 +34,13 @@ public class Server {
             this.socket = socket;
         }
 
+        public void start() {
+            new Thread(this).start();
+        }
+
         @Override
         public void run() {
-            super.run();
+
             System.out.println("client info:" + socket.getInetAddress() + "\tport:" + socket.getPort());
 
             try {
