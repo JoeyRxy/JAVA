@@ -12,7 +12,7 @@ public class Client {
         // 客户端
         Socket socket = new Socket();
         // 超时时间
-        socket.setSoTimeout(3000);
+        socket.setSoTimeout(30000);
         socket.connect(new InetSocketAddress(Inet4Address.getLocalHost(), 2019), 3000);// connet to server,so there
                                                                                        // should be the info of the
                                                                                        // server you want to connect

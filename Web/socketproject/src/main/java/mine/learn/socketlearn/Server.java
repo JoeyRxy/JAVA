@@ -21,7 +21,8 @@ public class Server {
             Socket clientSocket = serverSocket.accept();
             // 利用Tread构建异步线程：启动客户端
             ClientHandler clientHandler = new ClientHandler(clientSocket);
-            clientHandler.start();// extends from Tread
+            // new Thread(clientHandler);
+            clientHandler.start();
         }
 
     }
