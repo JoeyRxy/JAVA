@@ -21,8 +21,7 @@ public class Server {
             Socket clientSocket = serverSocket.accept();
             // 利用Tread构建异步线程：启动客户端
             ClientHandler clientHandler = new ClientHandler(clientSocket);
-            // new Thread(clientHandler);
-            clientHandler.start();
+            new Thread(clientHandler).start();
         }
 
     }
@@ -33,10 +32,6 @@ public class Server {
 
         ClientHandler(Socket socket) {
             this.socket = socket;
-        }
-
-        public void start() {
-            new Thread(this).start();
         }
 
         @Override
