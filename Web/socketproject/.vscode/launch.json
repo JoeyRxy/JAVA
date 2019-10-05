@@ -31,14 +31,16 @@
             "name": "CodeLens (Launch) - Client",
             "request": "launch",
             "mainClass": "mine.learn.socketlearn.Client",
-            "projectName": "socketproject"
+            "projectName": "socketproject",
+            "console": "externalTerminal"
         },
         {
             "type": "java",
             "name": "CodeLens (Launch) - Server",
             "request": "launch",
             "mainClass": "mine.learn.socketlearn.Server",
-            "projectName": "socketproject"
+            "projectName": "socketproject",
+            "console": "externalTerminal"
         },
         {
             "type": "java",

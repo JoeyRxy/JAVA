@@ -46,7 +46,7 @@ public class Server {
                 BufferedReader socketInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 do {
-                    // 从客户端拿到一条数据
+                    // 从客户端拿到一条请求
                     String str = socketInput.readLine();
                     if ("bye".equals(str)) {
                         flag = true;

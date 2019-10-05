@@ -6,6 +6,82 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Clinet2",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.tcp.stream.Clinet2",
+            "projectName": "NetProgram",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Server2",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.tcp.stream.Server2",
+            "projectName": "NetProgram",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Clinet",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.tcp.Clinet",
+            "projectName": "NetProgram",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Server",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.tcp.Server",
+            "projectName": "NetProgram",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - UDP2",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.udp.complex.UDP2",
+            "projectName": "NetProgram",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - UDP1",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.udp.complex.UDP1",
+            "projectName": "NetProgram",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - UDPSend",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.udp.UDPSend",
+            "projectName": "NetProgram"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - UDPReceiver",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.udp.UDPReceiver",
+            "projectName": "NetProgram"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Crawler",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.url.crawler.Crawler",
+            "projectName": "NetProgram"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Client",
+            "request": "launch",
+            "mainClass": "mine.learn.netprogram.clients.Client",
+            "projectName": "NetProgram"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",

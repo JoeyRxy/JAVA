@@ -2,7 +2,6 @@ package mine.learn.netprogram;
 
 import java.io.*;
 import java.net.*;
-import java.util.Enumeration;
 
 /**
  * Hello world!

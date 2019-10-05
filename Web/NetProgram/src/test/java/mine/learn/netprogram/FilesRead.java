@@ -2,8 +2,6 @@ package mine.learn.netprogram;
 
 import java.io.File;
 
-import org.junit.Test;
-
 /**
  * FilesRead
  */
