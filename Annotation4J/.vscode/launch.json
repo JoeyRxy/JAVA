@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "internalConsole",
+            "args": "mine.learn.annotation4j.sqlutils.bean.Member"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-App<Annotation4J>",
+            "request": "launch",
+            "mainClass": "mine.learn.annotation4j.App",
+            "projectName": "Annotation4J"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-UseCaseTracker<Annotation4J>",
+            "request": "launch",
+            "mainClass": "mine.learn.annotation4j.UseCaseTracker",
+            "projectName": "Annotation4J"
+        }
+    ]
+}

@@ -12,7 +12,8 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8888);// IMPORTANT：需指定端口
-        System.out.println("waiting for connection");
+        System.out.println("==========Server============");
+        System.out.println("running at " + serverSocket.getLocalSocketAddress());
         // ExecutorService pool = Executors.newFixedThreadPool(4);// 暂定最多同时4个线程;好像不太可行
 
         while (true) {
@@ -37,8 +38,10 @@ class ServerHandler implements Runnable {
 
     @Override
     public void run() {
+        InetAddress inetAddress = client.getInetAddress();
+        int port = client.getPort();
         try {
-            System.out.println("客户端建立了连接，其地址： " + client.getInetAddress() + " ，端口： " + client.getPort());
+            System.out.println("客户端建立了连接，其地址： " + inetAddress + " ，端口： " + port);
             InputStream inputStream = client.getInputStream();
             BufferedReader request = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
@@ -52,6 +55,7 @@ class ServerHandler implements Runnable {
                 // }
 
                 String msg = request.readLine();
+                System.out.print(inetAddress + "@" + port + " : ");
                 System.out.println(msg);
 
                 // 处理请求，进行服务
@@ -62,7 +66,7 @@ class ServerHandler implements Runnable {
             }
         } catch (IOException e) {
             // e.printStackTrace();
-            System.out.println("已断开连接");
+            System.out.println(inetAddress + "@" + port + " 已断开连接");
         }
     }
 }

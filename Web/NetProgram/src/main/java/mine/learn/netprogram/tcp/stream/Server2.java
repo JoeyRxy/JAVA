@@ -2,31 +2,19 @@ package mine.learn.netprogram.tcp.stream;
 
 import java.io.*;
 import java.net.*;
-// import java.util.concurrent.ExecutorService;
-// import java.util.concurrent.Executors;
 
-/**
- * Server
- */
 public class Server2 {
-
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8888);
-        System.out.println("waiting for connection");
 
         while (true) {
             Socket client = serverSocket.accept();
             new Thread(new ServerHandler(client)).start();
         }
-
     }
 }
 
-/**
- * 为什么多线程？因为服务器需要同时处理多个 服务请求
- */
 class ServerHandler implements Runnable {
-
     private Socket client;
 
     ServerHandler(Socket client) {
@@ -36,21 +24,29 @@ class ServerHandler implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("客户端建立了连接，其地址： " + client.getInetAddress() + " ，端口： " + client.getPort());
-            InputStream inputStream = client.getInputStream();
+            InetAddress clientAddr = client.getInetAddress();
+            int clientPort = client.getPort();
+            System.out.println("client connected @ " + clientAddr + ":" + clientPort);
 
+            InputStream inputStream = client.getInputStream();
             OutputStream outputStream = client.getOutputStream();
 
             while (true) {
-                byte[] readAllBytes = inputStream.readAllBytes();
-                String msg = new String(readAllBytes);
+                String msg = new String(new BufferedReader(new InputStreamReader(inputStream)).readLine());// FIXME: Why
+                                                                                                           // Server
+                                                                                                           // didn't
+                                                                                                           // receive
+                                                                                                           // Client's
+                                                                                                           // msg?
+                System.out.print("/" + clientAddr + "@" + clientPort + " : ");
                 System.out.println(msg);
 
-                String reply = "I received " + msg.length() + " words.";
+                String reply = "I received " + msg.length() + " words.";// return how many words the server got.
                 outputStream.write(reply.getBytes());
+                outputStream.flush();// flush to ensure send all msg,but seems doesn't work
             }
         } catch (IOException e) {
-            System.out.println("已断开连接");
+            e.printStackTrace();
         }
     }
 }

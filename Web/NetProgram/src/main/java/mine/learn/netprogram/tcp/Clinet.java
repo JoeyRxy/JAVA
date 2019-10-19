@@ -37,6 +37,7 @@ public class Clinet {
             System.out.println(receivedMsg);
             msgToSent = readerFromSysIn.readLine();
         }
+        printStream.println(msgToSent);
 
         socket.close();
     }
