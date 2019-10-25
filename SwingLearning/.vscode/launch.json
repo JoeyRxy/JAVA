@@ -1,5 +1,20 @@
 {
-    "configurations": [{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloWorld",
+            "request": "launch",
+            "mainClass": "mine.learn.HelloWorld",
+            "projectName": "SwingLearning"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoPic",
+            "request": "launch",
+            "mainClass": "mine.learn.DemoPic",
+            "projectName": "SwingLearning"
+        },
+        {
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
