@@ -6,8 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DemoDialog extends JDialog {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8670760330921235052L;
+
     public DemoDialog(Frame frame) {
-        super(frame,true);
+        super(frame, true);
         Container c = getContentPane();
         c.add(new JLabel("This is a Dialog"));
 

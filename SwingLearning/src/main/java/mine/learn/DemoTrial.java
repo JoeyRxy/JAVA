@@ -12,6 +12,11 @@ import javax.swing.*;
  */
 public class DemoTrial extends JDialog {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2283711579972872289L;
+
     public DemoTrial(JFrame frame) {
         super(frame, "Dialog Window's Title", true);
         Container c = getContentPane();

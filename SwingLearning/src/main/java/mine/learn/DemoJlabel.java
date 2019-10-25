@@ -1,12 +1,18 @@
 package mine.learn;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.Container;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class DemoJlabel extends JFrame {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6352464225189102630L;
+
     public DemoJlabel() {
-        setBounds(100,100,100,100);
+        setBounds(100, 100, 100, 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container container = getContentPane();
         setVisible(true);
@@ -17,12 +23,12 @@ public class DemoJlabel extends JFrame {
     }
 
     public static void main(String[] args) {
-//        JFrame frame = new JFrame("Demo JLabel");
-//        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        frame.setBounds(100);
-//        Container container = frame.getContentPane();
-//        frame.setVisible(true);
-//        container.add(new DemoJlabel());
+        // JFrame frame = new JFrame("Demo JLabel");
+        // frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // frame.setBounds(100);
+        // Container container = frame.getContentPane();
+        // frame.setVisible(true);
+        // container.add(new DemoJlabel());
         new DemoJlabel();
     }
 }

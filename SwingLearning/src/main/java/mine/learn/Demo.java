@@ -8,6 +8,10 @@ import javax.swing.border.*;
  */
 public class Demo extends JFrame {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1551688525163299386L;
     JList list;
     JLabel label;
     JButton btn;

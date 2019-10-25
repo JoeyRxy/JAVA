@@ -17,6 +17,10 @@ import javax.swing.JPanel;
  */
 public class EventHandling extends JFrame {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6127477967324310415L;
     private JFrame mainFrame;
     private JLabel headerLabel;
     private JLabel statusLabel;

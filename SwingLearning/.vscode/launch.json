@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - TextAreas",
+            "request": "launch",
+            "mainClass": "mine.learn.thinkinginjava.TextAreas",
+            "projectName": "SwingLearning"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - HelloWorld",
             "request": "launch",
             "mainClass": "mine.learn.HelloWorld",
