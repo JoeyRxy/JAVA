@@ -5,7 +5,7 @@ import java.awt.Button;
 
 import javax.swing.JFrame;
 
-import mine.learn.Console;
+import mine.learn.util.Console;
 
 /**
  * BorderLayout1

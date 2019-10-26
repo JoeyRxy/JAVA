@@ -1,4 +1,4 @@
-package mine.learn;
+package mine.learn.util;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
