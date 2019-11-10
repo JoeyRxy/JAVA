@@ -33,3 +33,20 @@
 
    if these files are not uploaded by the author to the repository,then there will promot:
    
+4. main class:
+   
+   in `pom`:
+   ```xml
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>mine.learn.fft.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+   ```

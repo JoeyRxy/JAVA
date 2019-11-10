@@ -24,7 +24,7 @@ public class TryCallable implements Callable<Integer> {
         FutureTask<Integer> futureTask = new FutureTask<>(t);
         for (int i = 0; i < 25; i++) {
             System.out.println(Thread.currentThread().getName() + " 的循环变量的值为" + i);
-            if (i == 20) {
+            if (i == 10) {
                 new Thread(futureTask, "有返回值的线程 ").start();
             }
         }

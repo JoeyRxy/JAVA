@@ -1,5 +1,13 @@
 {
-    "configurations": [{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TryCallable",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.TryCallable",
+            "projectName": "MultiThread"
+        },
+        {
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
