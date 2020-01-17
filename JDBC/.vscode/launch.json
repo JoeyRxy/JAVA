@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - JDBCUtils",
+            "request": "launch",
+            "mainClass": "mine.learn.utils.JDBCUtils",
+            "projectName": "JDBC"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Trial",
+            "request": "launch",
+            "mainClass": "mine.learn.Trial",
+            "projectName": "JDBC"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TestInput",
             "request": "launch",
             "mainClass": "mine.learn.TestInput",

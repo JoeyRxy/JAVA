@@ -20,11 +20,11 @@ public class AppTest {
     @Test
     public void testConn() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_trial?serverTimezone=UTC", "root",
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sunck?serverTimezone=UTC", "root",
                 "73699rxy");
         System.out.println(conn);
         Statement statement = conn.createStatement();
-        String sql = "INSERT INTO `db_trial`.t_stu (cid, gender, id, name, score)VALUES( 1,'f',7,'it',89);";
+        String sql = "INSERT INTO `sunck`.t_stu (cid, gender, id, name, score)VALUES( 1,'f',7,'it',89);";
         int i = statement.executeUpdate(sql);
         System.out.println(i);
 
@@ -52,4 +52,5 @@ public class AppTest {
         statement.close();
         conn.close();
     }
+
 }

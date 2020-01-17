@@ -1,15 +1,16 @@
 package mine.learn.utils;
 
-import com.alibaba.druid.pool.DruidDataSourceFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import javax.sql.DataSource;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 public class JDBCUtils {
     // 将配置参数提取到配置文件，便于修改
@@ -29,10 +30,8 @@ public class JDBCUtils {
             properties.load(inputStream);
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
