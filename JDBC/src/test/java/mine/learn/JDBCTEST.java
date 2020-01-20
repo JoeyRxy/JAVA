@@ -12,7 +12,8 @@ public class JDBCTEST {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_trial?serverTimezone=UTC",
                 "root", "73699rxy");
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM  t_stu where id = ?");
+        PreparedStatement preparedStatement = connection
+                .prepareStatement("SELECT * FROM  sunck.myapp_students where id = ?");
         System.out.println("plz enter id:");
         String id = "10";
         preparedStatement.setObject(1, id);
@@ -30,6 +31,28 @@ public class JDBCTEST {
         connection.close();
     }
 
+    private static String randomName(int seed) {
+        Random r = new Random(System.nanoTime() * seed * seed);
+        StringBuilder builder = new StringBuilder(11);
+        builder.append((char) (r.nextInt(27) + 65));
+        for (int i = 0; i < 5; i++) {
+            char c = (char) r.nextInt(127);
+            while (!((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))) {
+                c = (char) r.nextInt(127);
+            }
+            builder.append(c);
+        }
+        return new String(builder);
+    }
+
+    @Test
+    public void pwdGen() {
+        for (int i = 0; i < 100; i++) {
+            String s = JDBCTEST.randomName(i);
+            System.out.println(s);
+        }
+    }
+
     @Test
     // IMPORTANT
     public void sunckCreate() throws Exception {
@@ -37,35 +60,33 @@ public class JDBCTEST {
                 "73699rxy");
         System.out.println(conn);
 
-        Random r = new Random(System.currentTimeMillis());
-
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO myapp_grades VALUES(?,?,?,?,?,?)");
-        for (int i = 2; i < 10; i++) {
-            statement.setInt(1, i);
-            statement.setBoolean(6, true);
-            statement.setDate(3, new Date(2000, 1 + r.nextInt(13), 1 + r.nextInt(29)));
-            statement.setString(2, "Class" + i);
-            statement.setInt(4, r.nextInt(50));
-            statement.setInt(5, r.nextInt(100));
+        PreparedStatement statement = conn.prepareStatement("UPDATE sunck.myapp_students SET sname=? WHERE id = ?");
+        for (int i = 0; i < 1000; i++) {
+            statement.setString(1, JDBCTEST.randomName(i));
+            statement.setInt(2, 1 + i);
             statement.execute();
         }
 
         statement.close();
 
-        PreparedStatement statement2 = conn.prepareStatement("INSERT INTO myapp_students VALUES(?,?,?,?,?,?,?)");
-        String name;
-        for (int i = 0; i < 1000; i++) {
-            name = String.format("r%5d", i + 1);
-            statement2.setString(2, name);// name
-            statement2.setInt(1, i + 1);// id
-            statement2.setBoolean(6, true);// isDelete
-            statement2.setInt(7, 1 + r.nextInt(10));// sgrade_id
-            statement2.setString(5, "my name is " + name);// scontent
-            statement2.setBoolean(3, r.nextBoolean());// sgender
-            statement2.setInt(4, r.nextInt(10) + 10);// sage
-            statement2.execute();
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sunck?serverTimezone=UTC", "root",
+                "73699rxy");
+
+        PreparedStatement pstmt = conn.prepareStatement("select * from myapp_students where sname=?");
+
+        pstmt.setString(1, "Yy42V3");
+        ResultSet executeQuery = pstmt.executeQuery();
+
+        while (executeQuery.next()) {
+            String pwd = executeQuery.getString("pwd");
+            System.out.println(pwd);
         }
-        statement2.close();
 
     }
+
 }

@@ -5,8 +5,9 @@
     "version": "0.2.0",
     "configurations": [{
         "type": "java",
-        "name": "Debug (Launch) - Current File",
+        "name": "Debug Current File",
         "request": "launch",
+        "console": "internalConsole",
         "mainClass": "${file}",
         "stepFilters": {
             "classNameFilters": [

@@ -50,3 +50,10 @@
         </configuration>
       </plugin>
    ```
+
+5. maven directory structure
+
+
+![](image/2020-01-20-17-53-48.png)
+文件的根目录为：src, test, webapp   
+路径选择时要注意

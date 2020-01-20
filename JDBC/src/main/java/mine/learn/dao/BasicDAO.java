@@ -1,20 +1,25 @@
 package mine.learn.dao;
 
-import mine.learn.City;
-import mine.learn.utils.JDBCUtils;
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import mine.learn.City;
+import mine.learn.utils.JDBCUtils;
 
 /**
  * 注意其中的反射！ Reflection!
  * <p>
- * 为防止出现类型错误，City\Country.java中的成员变量 的数据类型使用包装类（int -> Integer) 并且 变量名字要使用和数据库中的名字一样的名字
+ * 为防止出现类型错误，City\Country.java中的成员变量 的数据类型使用包装类（int -> Integer) 并且
+ * 变量名字要使用和数据库中的名字一样的名字
  */
 public class BasicDAO {
     // 1,通用的增删改
@@ -72,8 +77,7 @@ public class BasicDAO {
                     field.set(instance, val);
                 }
             }
-        } catch (SQLException | NoSuchMethodException | NoSuchFieldException | InvocationTargetException
-                | InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             JDBCUtils.closeConnection(resultSet, preparedStatement, connection);
@@ -118,15 +122,13 @@ public class BasicDAO {
                 }
                 ans.add(instance);
             }
-        } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException
-                | InvocationTargetException | NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             JDBCUtils.closeConnection(resultSet, preparedStatement, connection);
         }
         return ans;
     }
-
 
     public static void main(String[] args) {
         BasicDAO basicDAO = new BasicDAO();
