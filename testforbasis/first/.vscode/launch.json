@@ -1,9 +1,18 @@
 {
-    "configurations": [{
-        "type": "java",
-        "name": "Debug (Launch) - Current File",
-        "request": "launch",
-        "mainClass": "${file}",
-        "console": "integratedTerminal"
-    }]
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - FilePath",
+            "request": "launch",
+            "mainClass": "basis.learn.FilePath",
+            "projectName": "first"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
 }
