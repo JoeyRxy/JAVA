@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "mine.learn.App",
+            "projectName": "SwingLearning"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Faces",
             "request": "launch",
             "mainClass": "mine.learn.Faces",
