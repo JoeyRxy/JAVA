@@ -79,13 +79,13 @@ Some other thread interrupts thread T.
 The specified amount of real time has elapsed, more or less. If timeout is zero, however, then real time is not taken into consideration and the thread simply waits until notified.
 The thread T is then removed from the wait set for this object and re-enabled for thread scheduling. It then competes in the usual manner with other threads for the right to synchronize on the object; once it has gained control of the object, all its synchronization claims on the object are restored to the status quo ante - that is, to the situation as of the time that the wait method was invoked. Thread T then returns from the invocation of the wait method. Thus, on return from the wait method, the synchronization state of the object and of thread T is exactly as it was when the wait method was invoked.
 A thread can also wake up without being notified, interrupted, or timing out, a so-called spurious wakeup. While this will rarely occur in practice, applications must guard against it by testing for the condition that should have caused the thread to be awakened, and continuing to wait if the condition is not satisfied. In other words, waits should always occur in loops, like this one:
-
-     synchronized (obj) {
-         while (<condition does not hold>)
-             obj.wait(timeout);
-         ... // Perform action appropriate to condition
-     }
- 
+```java
+synchronized (obj) {
+   while (<condition does not hold>)
+       obj.wait(timeout);
+   ... // Perform action appropriate to condition
+}
+```
 (For more information on this topic, see section 14.2, Condition Queues, in Brian Goetz and others' "Java Concurrency in Practice" (Addison-Wesley, 2006) or Item 69 in Joshua Bloch's "Effective Java (Second Edition)" (Addison-Wesley, 2008).
 If the current thread is interrupted by any thread before or while it is waiting, then an InterruptedException is thrown. This exception is not thrown until the lock status of this object has been restored as described above.
 
@@ -96,9 +96,7 @@ This method should only be called by a thread that is the owner of this object's
 Parameters:
 timeout - the maximum time to wait in milliseconds.
 
-# public final void wait​(long timeout,
-                       int nanos)
-                throws InterruptedException
+# public final void wait​(long timeout,                       int nanos)                throws InterruptedException
 Causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object, or some other thread interrupts the current thread, or a certain amount of real time has elapsed.
 This method is similar to the wait method of one argument, but it allows finer control over the amount of time to wait for a notification before giving up. The amount of real time, measured in nanoseconds, is given by:
 
@@ -112,13 +110,13 @@ The timeout period, specified by timeout milliseconds plus nanos nanoseconds arg
 The thread then waits until it can re-obtain ownership of the monitor and resumes execution.
 
 As in the one argument version, interrupts and spurious wakeups are possible, and this method should always be used in a loop:
-
-     synchronized (obj) {
-         while (<condition does not hold>)
-             obj.wait(timeout, nanos);
-         ... // Perform action appropriate to condition
-     }
- 
+```java
+synchronized (obj) {
+   while (<condition does not hold>)
+       obj.wait(timeout, nanos);
+   ... // Perform action appropriate to condition
+}
+```
 This method should only be called by a thread that is the owner of this object's monitor. See the notify method for a description of the ways in which a thread can become the owner of a monitor.
 Parameters:
 timeout - the maximum time to wait in milliseconds.

@@ -9,7 +9,20 @@
             "request": "launch",
             "mainClass": "${file}",
             "console": "internalConsole",
-            "args": "mine.learn.annotation4j.sqlutils.bean.Member"
+            // "args": "mine.learn.annotation4j.sqlutils.bean.Member"
+            "stepFilters": {
+                "classNameFilters": [
+                    "java.*",
+                    "javax.*",
+                    "com.sun.*",
+                    "sun.*",
+                    "sunw.*",
+                    "org.omg.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            }
         },
         {
             "type": "java",

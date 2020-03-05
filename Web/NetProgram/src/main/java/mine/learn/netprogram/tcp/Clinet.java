@@ -38,7 +38,10 @@ public class Clinet {
             msgToSent = readerFromSysIn.readLine();
         }
         printStream.println(msgToSent);
-
+        printStream.close();
+        outputStream.close();
+        received.close();
+        inputStream.close();
         socket.close();
     }
 

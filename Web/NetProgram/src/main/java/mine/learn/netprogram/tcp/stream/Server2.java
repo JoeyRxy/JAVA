@@ -32,12 +32,7 @@ class ServerHandler implements Runnable {
             OutputStream outputStream = client.getOutputStream();
 
             while (true) {
-                String msg = new String(new BufferedReader(new InputStreamReader(inputStream)).readLine());// FIXME: Why
-                                                                                                           // Server
-                                                                                                           // didn't
-                                                                                                           // receive
-                                                                                                           // Client's
-                                                                                                           // msg?
+                String msg = new String(new BufferedReader(new InputStreamReader(inputStream)).readLine());
                 System.out.print("/" + clientAddr + "@" + clientPort + " : ");
                 System.out.println(msg);
 

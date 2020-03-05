@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - NotifyAndWait",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.NotifyAndWait",
+            "projectName": "MultiThread"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TryCallable",
             "request": "launch",
             "mainClass": "mine.learn.multithread.TryCallable",
