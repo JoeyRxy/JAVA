@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        var ws;
+        var loc = window.location;
+        var uri;
+        if (loc === 'https:') {
+            uri = 'wss:'
+        } else {
+            uri = 'ws:'
+        }
+        uri += ('//' + loc.host);
+        uri += (loc.pathname + 'websocket/rxy');
+        console.log(uri);
+
+
+        ws = new WebSocket(uri);
+
+        ws.onerror = (e) => {
+            $("#msg").append('<br>' + e.data + '. error! ');
+        }
+
+        ws.onmessage = (event) => {
+            $("#msg").append('<br>' + event.data + '<br>');
+        }
+
+        ws.onclose = (event) => {
+            $("#msg").append('<br>' + event.data);
+        }
+
+        ws.onopen = (event) => {
+            $("#msg").html(event.data);
+        }
+
+        window.onbeforeunload = () => {
+            ws.close();
+        }
+
+        window.closed = () => {
+            ws.close();
+        }
+
+        function send() {
+            if (ws === undefined || ws === null) { alert("未连接"); return; }
+            var msg = $("#text").val();
+            ws.send(msg);
+        }
+
+        function closeWebSocket() {
+            if (ws === undefined || ws === null) { alert("未连接"); return; }
+            ws.close();
+        }
+    </script>
+</head>
+
+<body>
+    <input id="text" type="text"><br>
+    <button onclick="send()">send</button><br>
+    <button onclick="closeWebSocket()">close</button>
+    <div id="msg"></div>
+</body>
+
+</html>

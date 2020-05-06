@@ -1,0 +1,5 @@
+function loadchart() {
+    var option = {
+
+    }
+}

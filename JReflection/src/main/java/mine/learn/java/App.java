@@ -16,10 +16,6 @@ public class App {
         return a - b;
     }
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
-
     public App(int x, int y) {
         this.x = x;
         this.y = y;

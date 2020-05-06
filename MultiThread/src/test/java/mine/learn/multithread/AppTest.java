@@ -19,4 +19,9 @@ public class AppTest {
         TryRunnable app2 = new TryRunnable("thread 2");
         app2.start();
     }
+
+    @Test
+    public void teststest() {
+        System.out.println(Math.pow(Math.exp(Math.pow(Math.PI, Math.E)), 10.911));
+    }
 }

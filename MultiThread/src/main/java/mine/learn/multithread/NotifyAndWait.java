@@ -32,13 +32,28 @@ public class NotifyAndWait {
         @Override
         public void run() {
             try {
+                System.out.println(Thread.currentThread().getName() + "开始运行！");
+                Thread.sleep((int) (Math.random() * 5000));
+                System.out.println("线程" + Thread.currentThread().getName() + "想要获得锁……" + System.currentTimeMillis());
                 synchronized (lock) {
-                    if (NotifyAndWait.size() != 5) {
-                        System.out.println("Thread A wait begin at " + System.currentTimeMillis());
+                    System.out.println("线程" + Thread.currentThread().getName() + "获得了锁！" + System.currentTimeMillis());
+                    if (NotifyAndWait.size() != 10) {
+                        System.out.println(
+                                "线程" + Thread.currentThread().getName() + "释放了锁：" + System.currentTimeMillis());
                         lock.wait();
-                        System.out.println("Thread A wait end at " + System.currentTimeMillis());
+                        System.out.println(
+                                "线程" + Thread.currentThread().getName() + "获得了锁： " + System.currentTimeMillis());
                     }
+                    Thread.sleep((int) (Math.random() * 5000));
+                    System.out.println(
+                            "线程" + Thread.currentThread().getName() + "执行完了同步代码块：" + System.currentTimeMillis());
+                    lock.notifyAll();
+                    System.out.println(
+                            "线程" + Thread.currentThread().getName() + "已经通知其他线程进入锁池：" + System.currentTimeMillis());
                 }
+                System.out.println(Thread.currentThread().getName() + "开始执行 非 同步任务……");
+                Thread.sleep(5000);
+                System.out.println("线程" + Thread.currentThread().getName() + "执行完了非同步任务！");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -56,17 +71,36 @@ public class NotifyAndWait {
         @Override
         public void run() {
             try {
+                System.out.println(Thread.currentThread().getName() + "开始运行！");
+                Thread.sleep((int) (Math.random() * 5000));
+                System.out.println("线程" + Thread.currentThread().getName() + "想要获得锁……" + System.currentTimeMillis());
                 synchronized (lock) {
+                    System.out.println("线程" + Thread.currentThread().getName() + "获得了锁！" + System.currentTimeMillis());
                     for (int i = 0; i < 10; i++) {
                         NotifyAndWait.add();
                         if (NotifyAndWait.size() == 5) {
-                            lock.notify();
-                            System.out.println("Thread B 已经发出了通知");
+                            lock.notifyAll();
+                            System.out.println("线程" + Thread.currentThread().getName() + "已经通知其他线程进入锁池："
+                                    + System.currentTimeMillis());
+                            System.out.println(
+                                    "线程" + Thread.currentThread().getName() + "释放了锁：" + System.currentTimeMillis());
+                            lock.wait();
                         }
-                        System.out.println("Thread B 添加了" + (i + 1) + "个元素!");
-                        Thread.sleep(1000);
+                        System.out.println("线程" + Thread.currentThread().getName() + " 添加了" + (i + 1) + "个元素!");
+                        Thread.sleep((int) (Math.random() * 5000));
+                        if (NotifyAndWait.size() == 13) {
+                            lock.notifyAll();
+                            System.out.println("线程" + Thread.currentThread().getName() + "已经通知其他线程进入锁池："
+                                    + System.currentTimeMillis());
+                            System.out.println(
+                                    "线程" + Thread.currentThread().getName() + "释放了锁：" + System.currentTimeMillis());
+                            lock.wait();
+                        }
                     }
+                    lock.notifyAll();
                 }
+                System.out.println(Thread.currentThread().getName() + "开始执行 非 同步任务……");
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -78,13 +112,15 @@ public class NotifyAndWait {
         try {
             Object lock = new Object();
 
-            ThreadA a = new ThreadA("Thread A", lock);
+            ThreadA a = new ThreadA(" A", lock);
             a.start();
 
             Thread.sleep(50);
 
-            ThreadB b = new ThreadB("Thread B", lock);
+            ThreadB b = new ThreadB(" B", lock);
+            ThreadB c = new ThreadB(" C", lock);
             b.start();
+            c.start();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

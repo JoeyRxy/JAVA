@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph</title>
+    <script src="echarts.min.js"></script>
+    <script>
+        window.onload = function () {
+            var graph = {
+                nodes: [{
+                        name: '1',
+                        // value: 10
+                    },
+                    {
+                        name: '2',
+                        // value: 5
+                    },
+                    {
+                        name: '3',
+                        // value: 8
+                    }
+                ],
+                links: [{
+                        source: '1',
+                        target: '2',
+                        value: 20
+                    },
+                    {
+                        source: '1',
+                        target: '3',
+                        value: 2
+                    },
+                    {
+                        source: '3',
+                        target: '2',
+                        value: 8
+                    }
+                ]
+            }
+            var chart = echarts.init(document.getElementById("main"));
+            var option = {
+                title: {
+                    text: 'Graph',
+                },
+                tooltip: {},
+                series: [{
+                    name: 'first',
+                    type: 'graph',
+                    layout: 'force',
+                    data: graph.nodes,
+                    links: graph.links,
+                    roam: true,
+                    focusNodeAdjacency: true,
+                    draggable: true,
+                    force: {
+                        edgeLength: [10, 50]
+                    },
+                    lineStyle: {
+                        color: '#2a86ff',
+                        curveness: 0.2,
+                        width: 3
+                    }
+                }]
+            };
+            chart.setOption(option);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="main" style="width: 1200px;height:600px;">
+
+    </div>
+</body>
+
+</html>

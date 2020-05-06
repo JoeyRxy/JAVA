@@ -3,11 +3,47 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [{
-        "type": "java",
-        "name": "Debug (Launch) - Current File",
-        "request": "launch",
-        "mainClass": "${file}",
-        "console": "internalConsole"
-    }]
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ParamRef",
+            "request": "launch",
+            "mainClass": "mine.learn.basic.ParamRef",
+            "projectName": "basiclearn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Maps",
+            "request": "launch",
+            "mainClass": "mine.learn.basic.maps.Maps",
+            "projectName": "basiclearn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - A",
+            "request": "launch",
+            "mainClass": "mine.learn.basic.A",
+            "projectName": "basiclearn"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "internalConsole",
+            "stepFilters": {
+                "classNameFilters": [
+                    "java.*",
+                    "javax.*",
+                    "com.sun.*",
+                    "sun.*",
+                    "sunw.*",
+                    "org.omg.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            }
+        }
+    ]
 }

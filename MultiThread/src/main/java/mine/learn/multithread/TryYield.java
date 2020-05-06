@@ -14,7 +14,7 @@ class InnerTryYield extends Thread {
         for (int i = 0; i < 30; i++) {
             System.out.println(this.getName() + "..." + i);
             if (i == 20) {
-                this.yield();
+                Thread.yield();
             }
         }
     }

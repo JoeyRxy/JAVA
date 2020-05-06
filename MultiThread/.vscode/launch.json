@@ -2,10 +2,32 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - InterestCall",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.InterestCall",
+            "projectName": "MultiThread"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.pool.Main",
+            "projectName": "MultiThread"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MultiThreadPool",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.pool.MultiThreadPool",
+            "projectName": "MultiThread"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - NotifyAndWait",
             "request": "launch",
             "mainClass": "mine.learn.multithread.NotifyAndWait",
-            "projectName": "MultiThread"
+            "projectName": "MultiThread",
+            "console": "internalConsole"
         },
         {
             "type": "java",
