@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SerializableTest",
+            "request": "launch",
+            "mainClass": "mine.learn.basic.serialize.SerializableTest",
+            "projectName": "basiclearn"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ParamRef",
             "request": "launch",
             "mainClass": "mine.learn.basic.ParamRef",
@@ -27,7 +34,7 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "Debug Current File",
             "request": "launch",
             "mainClass": "${file}",
             "console": "internalConsole",

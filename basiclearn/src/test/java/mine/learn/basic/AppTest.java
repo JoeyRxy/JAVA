@@ -7,6 +7,9 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
+import mine.learn.basic.polymorphism.Animal;
+import mine.learn.basic.polymorphism.Cat;
+
 /**
  * Unit test for simple App.
  */
@@ -87,5 +90,11 @@ public class AppTest {
         System.out.println(map);
         Integer integer = map.get(new TStr(bytes[3]));
         System.out.println(integer);
+    }
+
+    @Test
+    public void testPolymorphism() {
+        Animal animal = new Cat();
+        animal.speak();
     }
 }

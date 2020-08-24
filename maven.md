@@ -75,3 +75,39 @@
 </plugin>
 ```
 对应的命令不是package，而是assembly:assembly
+
+7. 什么垃圾管理啊？？ 用shade插件必须把<plugins>外的<pluginManagement>去掉，因为这个命令会自动使用默认的插件……
+
+```xml
+<build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+      </plugin>
+      <plugin>
+        <!-- <groupId>org.apache.maven.plugins</groupId> -->
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>project-classifier</shadedClassifierName>
+              <outputFile>shade\${project.artifactId}.jar</outputFile>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>Launcher</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```

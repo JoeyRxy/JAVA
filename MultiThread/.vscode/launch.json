@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "mine.learn.multithread.join.Main",
+            "projectName": "MultiThread"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - InterestCall",
             "request": "launch",
             "mainClass": "mine.learn.multithread.InterestCall",
