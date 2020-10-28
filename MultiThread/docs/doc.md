@@ -24,6 +24,8 @@ class A {
 - 如果使用`synchronized(<obj>)`。需要获取某个指定的对象的锁，like `Object lock = new Object();`。
 - 使用类锁`synchronized(A.class)`，同理。
 
+多个线程运行synchronized所在代码时，只有一个得到该锁，其他线程阻塞，直到得到锁的线程释放锁，其他线程再进行争抢。
+
 
 ---
 

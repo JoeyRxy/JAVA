@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug Cur",
+            "request": "launch",
+            "mainClass": "${file}",
+            "stepFilters": {
+                "skipClasses": [
+                    "$JDK",
+                    "junit.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            },
+            "internalConsoleOptions": "openOnSessionStart",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-App<data-processing>",
+            "request": "launch",
+            "mainClass": "rxy.learn.database.App",
+            "projectName": "data-processing"
+        }
+    ]
+}

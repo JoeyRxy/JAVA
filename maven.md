@@ -5,7 +5,7 @@
     mvn archetype:generate -DarchetypeArtifactId="maven-archetype-quickstart" -DarchetypeGroupId="org.apache.maven.archetypes" -DarchetypeCatalog=local
    ```
    which `-DarchetypeCatalog=local`'s prerequisite  is a `archetype-catalog.xml` file in local repository.
-   the file can download from [archtype-catalog.xml](https://github.com/JoeyRxy/code/blob/master/Java/archetype-catalog.xml)
+   the file can download from [archetype-catalog.xml](https://github.com/JoeyRxy/code/blob/master/Java/archetype-catalog.xml)
 
 2. add external jar to local repository
    get the jar.

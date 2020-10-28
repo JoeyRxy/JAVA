@@ -1,7 +1,0 @@
-{
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.completion.filteredTypes": [
-        // "java.awt.*",
-        "com.sun.*"
-    ]
-}
