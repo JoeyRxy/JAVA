@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
  * FreqAnalysis
  */
 public class GnssCN0Analysis {
-
+    // data\data (2).json
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(new File("data/data.json"), StandardCharsets.UTF_8));
         String line;
@@ -27,6 +27,7 @@ public class GnssCN0Analysis {
         JSONArray array = JSONArray.parseArray(builder.toString());
         builder = null;
 
+        // times
         int len = array.size();
         float[][] cn0OfTimes = new float[Integer.parseInt(array.getJSONObject(len - 1).getString("times"))
                 - Integer.parseInt(array.getJSONObject(0).getString("times")) + 1][64];
@@ -50,7 +51,7 @@ public class GnssCN0Analysis {
         }
         //
         BufferedWriter writer = new BufferedWriter(
-                new FileWriter(new File("data/freq_analysis.csv"), StandardCharsets.UTF_8));
+                new FileWriter(new File("data/freq_analysis (4).csv"), StandardCharsets.UTF_8));
         builder = new StringBuilder();
         builder.append("Times").append(',');
         for (int i = 0; i < 64; ++i)
