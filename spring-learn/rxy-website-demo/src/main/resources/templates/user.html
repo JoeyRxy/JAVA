@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function login() {
+            var data = { userid: $('#userid').val(), password: $('#password').val() };
+            $.ajax({
+                url: '/user/login',
+                method: 'POST',
+                data: JSON.stringify(data),
+                success: function (res) {
+                    console.log(res);
+                    if (res !== null) {
+                        $('#userinfo').text(res["username"]);
+                        alert('Logged In!');
+                    }
+                },
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json'
+            });
+        }
+        function register() {
+            var data = { username: $('#username').val(), userid: $('#r_userid').val(), password: $('#r_password').val() };
+            $.ajax({
+                url: '/user/register',
+                method: 'POST',
+                data: JSON.stringify(data),
+                success: function (res) {
+                    console.log(res);
+                    if (res !== null) {
+                        $('#userid').val(res['userid']);
+                        $('#password').val(res['password']);
+                        alert('Registered!');
+                    }
+                },
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8"
+            });
+        }
+    </script>
+    <title>User</title>
+</head>
+
+<body>
+    <nav th:insert="header::header"></nav>
+    <div>
+        <input type="text" name="userid" id="userid">
+        <input type="password" name="password" id="password">
+        <button onclick="login();">Log In</button>
+    </div>
+
+    <div>
+        <input type="text" name="username" id="username">
+        <input type="text" name="r_userid" id="r_userid">
+        <input type="password" name="r_password" id="r_password">
+        <button onclick="register();">Register</button>
+    </div>
+    <nav th:insert="footer::footer"></nav>
+</body>
+
+</html>

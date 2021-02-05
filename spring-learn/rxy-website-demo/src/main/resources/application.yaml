@@ -5,4 +5,4 @@ spring:
     password: 73699rxy
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update

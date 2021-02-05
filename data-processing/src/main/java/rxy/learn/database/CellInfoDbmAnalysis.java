@@ -17,8 +17,8 @@ import com.alibaba.fastjson.JSONObject;
 public class CellInfoDbmAnalysis {
 
     public static void main(String[] args) throws IOException {
-        File dataFile = new File("data/cellinfos (1).json");
-        File retFile = new File("data/cellinfos_dbmanalysis (1).csv");
+        File dataFile = new File("data/new cellinfo2.json");
+        File retFile = new File("data/new cellinfos_dbmanalysis2.csv");
         BufferedReader reader = new BufferedReader(new FileReader(dataFile, StandardCharsets.UTF_8));
         String line;
         StringBuilder builder = new StringBuilder();

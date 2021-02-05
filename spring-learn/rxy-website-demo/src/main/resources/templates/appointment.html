@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/appointment.js"></script>
+    <script>
+        $(()=>{
+            date = new Date();
+            checkAppointment(date);
+        });
+    </script>
+    <title>Appointment</title>
+</head>
+<body>
+    <nav th:insert="header::header"></nav>
+
+    
+    <table>
+        <thead>
+            <tr>
+                <td>Time</td>
+                <td>Appointment</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><button>Appoint</button></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><button>Appoint</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <nav th:insert="footer::footer"></nav>
+</body>
+</html>
