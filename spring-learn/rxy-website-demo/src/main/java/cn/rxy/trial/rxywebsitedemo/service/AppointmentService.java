@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,29 +24,33 @@ public class AppointmentService {
 
     public final List<String> getAppointment(Date date) {
         Appointment t = appointmentRepo.findByDate(date);
-        if (t == null) return null;
+        if (t == null)
+            return null;
         return List.of(t.getUser0id(), t.getUser1id(), t.getUser2id(), t.getUser3id(), t.getUser4id(), t.getUser5id(),
-                t.getUser6id(), t.getUser7id(), t.getUser8id(), t.getUser9id(), t.getUseraid(),
-                t.getUserbid(), t.getUsercid(), t.getUserdid(), t.getUsereid(), t.getUserfid());
+                t.getUser6id(), t.getUser7id(), t.getUser8id(), t.getUser9id(), t.getUseraid(), t.getUserbid(),
+                t.getUsercid(), t.getUserdid(), t.getUsereid(), t.getUserfid());
     }
 
     public final Map<Date, List<String>> getAppointmentBetween(Date from, Date to) {
-        if (from.after(to)) return null;
+        if (from.after(to))
+            return null;
         List<Appointment> list = appointmentRepo.findAllByDateBetween(from, to);
-        if (list == null || list.size() == 0) return null;
+        if (list == null || list.size() == 0)
+            return null;
         Map<Date, List<String>> ret = new HashMap<>();
-        for (Appointment t: list) {
-            ret.put(t.getDate(), List.of(t.getUser0id(), t.getUser1id(), t.getUser2id(), t.getUser3id(), t.getUser4id(), t.getUser5id(),
-            t.getUser6id(), t.getUser7id(), t.getUser8id(), t.getUser9id(), t.getUseraid(),
-            t.getUserbid(), t.getUsercid(), t.getUserdid(), t.getUsereid(), t.getUserfid()));
+        for (Appointment t : list) {
+            ret.put(t.getDate(), List.of(t.getUser0id(), t.getUser1id(), t.getUser2id(), t.getUser3id(), t.getUser4id(),
+                    t.getUser5id(), t.getUser6id(), t.getUser7id(), t.getUser8id(), t.getUser9id(), t.getUseraid(),
+                    t.getUserbid(), t.getUsercid(), t.getUserdid(), t.getUsereid(), t.getUserfid()));
         }
         return ret;
     }
 
     public final int getTodayAppointment4User(String userid) {
+        if (userid == null || userid.equals("")) return -1;
         int time = 0;
-        for (String str: getTodayAppointment()) {
-            if (userid.equals(str)) 
+        for (String str : getTodayAppointment()) {
+            if (userid.equals(str))
                 return time;
             ++time;
         }
@@ -53,13 +58,33 @@ public class AppointmentService {
     }
 
     public final int getAppointment4User(Date date, String userid) {
+        if (userid == null || userid.equals("")) return -1;
         int time = 0;
-        for (String str: getAppointment(date)) {
-            if (userid.equals(str)) 
+        for (String str : getAppointment(date)) {
+            if (userid.equals(str))
                 return time;
             ++time;
         }
         return -1;
+    }
+
+    public final Map<Date, Integer> getAppointment4UserBetween(Date from, Date to, String userid) {
+        if (userid == null || userid.equals("")) return null;
+        Map<Date, List<String>> appointments = getAppointmentBetween(from, to);
+        Map<Date, Integer> ret = new HashMap<>();
+        for (Entry<Date, List<String>> entry : appointments.entrySet()) {
+            int time = 0;
+            boolean found = false;
+            for (String id : entry.getValue()) {
+                if (userid.equals(id)) {
+                    found = true;
+                    break;
+                }
+                ++time;
+            }
+            ret.put(entry.getKey(), found ? time : -1);
+        }
+        return ret;
     }
 
     public final boolean appointToday(int time, String userid) {

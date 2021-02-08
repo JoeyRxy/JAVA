@@ -1,8 +1,8 @@
 package cn.rxy.trial.rxywebsitedemo.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import cn.rxy.trial.rxywebsitedemo.entity.User;
@@ -71,8 +71,16 @@ public class UserService {
         return user.isAdmin();
     }
 
-    public List<User> allUsers() {
-        return userRepo.findAll();
+    public Page<User> allUsersByPage(int page, int size) {
+        if (page >= 0 && size > 0)
+            return userRepo.findAll(PageRequest.of(page, size));
+        return null;
+    }
+
+    public Page<User> allUsersNotAdminByPage(int page, int size) {
+        if (page >= 0 && size > 0)
+            return userRepo.findAllByAdminFalse(PageRequest.of(page, size));
+        return null;
     }
 
 }

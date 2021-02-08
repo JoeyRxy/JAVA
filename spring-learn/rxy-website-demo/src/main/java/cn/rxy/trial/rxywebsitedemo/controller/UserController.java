@@ -1,7 +1,6 @@
 package cn.rxy.trial.rxywebsitedemo.controller;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,35 +30,36 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public User login(@RequestBody User puser, HttpServletRequest req, HttpServletResponse resp) {
+    public User login(@RequestBody User puser, HttpSession session, HttpServletResponse resp) {
         User user = userService.login(puser);
         if (user == null)
             return null;
-        HttpSession session = req.getSession();
         session.setAttribute("userid", user.getUserid());
         session.setMaxInactiveInterval(1800);
         Cookie cookie1 = new Cookie("username", user.getUsername());
-        cookie1.setMaxAge(1800);
         cookie1.setPath("/");
         resp.addCookie(cookie1);
         Cookie cookie2 = new Cookie("userid", user.getUserid());
-        cookie2.setMaxAge(1800);
         cookie2.setPath("/");
         resp.addCookie(cookie2);
+        if (user.isAdmin()) {
+            Cookie cookie3 = new Cookie("admin", "true");
+            cookie3.setPath("/");
+            resp.addCookie(cookie3);
+        }
         user.setPassword("");
         return user;
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest req, HttpServletResponse resp) {
-        req.removeAttribute("userid");
+    public void logout(HttpSession session, HttpServletResponse resp) {
+        session.removeAttribute("userid");
         Cookie usernameCookie = new Cookie("username", "");
         usernameCookie.setMaxAge(0);
         Cookie useridCookie = new Cookie("userid", "");
         useridCookie.setMaxAge(0);
         resp.addCookie(usernameCookie);
         resp.addCookie(useridCookie);
-        return "index";
     }
 
     @PostMapping("/register")
@@ -76,13 +76,13 @@ public class UserController {
     @PostMapping("/resetpwd")
     @ResponseBody
     public User resetPassword(@RequestParam("token") String token, @RequestParam("newpwd") String newpwd,
-            HttpServletRequest req, HttpServletResponse resp) {
-        Object userid = req.getSession().getAttribute("userid");
+            HttpSession session, HttpServletResponse resp) {
+        Object userid = session.getAttribute("userid");
         if (userid == null)
             return null;
         User user = new User(userid.toString(), newpwd);
         if (userService.resetPwd(user, token)) {
-            req.getSession().removeAttribute("userid");
+            session.removeAttribute("userid");
             Cookie usernameCookie = new Cookie("username", "");
             usernameCookie.setMaxAge(0);
             Cookie useridCookie = new Cookie("userid", "");

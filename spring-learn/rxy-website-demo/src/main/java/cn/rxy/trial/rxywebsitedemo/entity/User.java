@@ -12,18 +12,28 @@ public class User {
     private String username;
     private String userid;
     private String password;
-    private boolean isAdmin;
+    private boolean admin;
+    private String note = "";
 
     public User() {
     }
 
+    @Column(length = 1023)
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Column
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
 
     public User(String username, String userid, String password) {
@@ -57,7 +67,7 @@ public class User {
         this.username = username;
     }
 
-    @Column(length = 61)
+    @Column(length = 61, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -74,5 +84,11 @@ public class User {
     public void setUserid(String userid) {
         this.userid = userid;
     }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", userid=" + userid + "]";
+    }
     
+
 }

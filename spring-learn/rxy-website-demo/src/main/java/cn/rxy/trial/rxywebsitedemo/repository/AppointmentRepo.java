@@ -3,6 +3,8 @@ package cn.rxy.trial.rxywebsitedemo.repository;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +22,8 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
     Appointment findByDate(Date date);
 
     List<Appointment> findAllByDateBetween(Date from, Date to);
+
+    Page<Appointment> findAll(Pageable pageable);
 
     @Transactional
     @Modifying

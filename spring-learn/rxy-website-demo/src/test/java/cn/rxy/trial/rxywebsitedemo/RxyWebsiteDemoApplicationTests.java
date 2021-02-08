@@ -3,18 +3,24 @@ package cn.rxy.trial.rxywebsitedemo;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import cn.rxy.trial.rxywebsitedemo.entity.User;
 import cn.rxy.trial.rxywebsitedemo.service.AppointmentService;
+import cn.rxy.trial.rxywebsitedemo.service.UserService;
 
 @SpringBootTest
 class RxyWebsiteDemoApplicationTests {
 
     @Autowired
     private AppointmentService appointService;
+
+    @Autowired
+    private UserService userService;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -51,6 +57,27 @@ class RxyWebsiteDemoApplicationTests {
         System.out.println(appointService.getTodayAppointment());
         System.out.println(appointService.getAppointment(date4));
         System.out.println(appointService.getAppointmentBetween(date1, date4));
+    }
+
+    @Test
+    public void userTest() {
+        User user;
+        System.out.println(
+                (user = userService.login(new User("rxy007", "test1234"))) == null ? "failed!" : user.getUserid());
+        System.out.println(userService.isAdmin("rxy007"));
+        List<User> list_page2 = userService.allUsersNotAdminByPage(0, 30).toList();
+        System.out.println(list_page2.size());
+        int idx = -1;
+        for (User user2 : list_page2) {
+            System.out.println((++idx) + ": " + user2);
+        }
+        System.out.println("=========================================");
+        List<User> list_page4 = userService.allUsersNotAdminByPage(3, 30).toList();
+        System.out.println(list_page4.size());
+        idx = -1;
+        for (User user2 : list_page4) {
+            System.out.println((++idx) + ": " + user2);
+        }
     }
 
 }
