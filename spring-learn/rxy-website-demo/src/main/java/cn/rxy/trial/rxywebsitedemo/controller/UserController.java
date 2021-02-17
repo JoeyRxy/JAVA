@@ -1,10 +1,12 @@
 package cn.rxy.trial.rxywebsitedemo.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,11 +22,15 @@ import cn.rxy.trial.rxywebsitedemo.service.UserService;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("")
-    public String index() {
+    public String index(HttpSession session, HttpServletResponse resp) {
+        if (session.getAttribute("userid") == null) removeStatCookie(resp);
         return "user";
     }
 
@@ -36,7 +42,7 @@ public class UserController {
             return null;
         session.setAttribute("userid", user.getUserid());
         session.setMaxInactiveInterval(1800);
-        Cookie cookie1 = new Cookie("username", user.getUsername());
+        Cookie cookie1 = new Cookie("username", URLEncoder.encode(user.getUsername(), StandardCharsets.UTF_8));
         cookie1.setPath("/");
         resp.addCookie(cookie1);
         Cookie cookie2 = new Cookie("userid", user.getUserid());
@@ -46,20 +52,28 @@ public class UserController {
             Cookie cookie3 = new Cookie("admin", "true");
             cookie3.setPath("/");
             resp.addCookie(cookie3);
+        } else {
+            Cookie cookie3 = new Cookie("admin", "false");
+            cookie3.setPath("/");
+            resp.addCookie(cookie3);
         }
         user.setPassword("");
         return user;
     }
 
-    @PostMapping("/logout")
-    public void logout(HttpSession session, HttpServletResponse resp) {
-        session.removeAttribute("userid");
+    public static void removeStatCookie(HttpServletResponse resp) {
         Cookie usernameCookie = new Cookie("username", "");
         usernameCookie.setMaxAge(0);
         Cookie useridCookie = new Cookie("userid", "");
         useridCookie.setMaxAge(0);
         resp.addCookie(usernameCookie);
         resp.addCookie(useridCookie);
+    }
+
+    @PostMapping("/logout")
+    public void logout(HttpSession session, HttpServletResponse resp) {
+        session.removeAttribute("userid");
+        removeStatCookie(resp);
     }
 
     @PostMapping("/register")

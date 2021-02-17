@@ -23,6 +23,8 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
 
     List<Appointment> findAllByDateBetween(Date from, Date to);
 
+    List<Appointment> findAllByDateGreaterThanEqual(Date from);
+
     Page<Appointment> findAll(Pageable pageable);
 
     @Transactional

@@ -1,1 +1,1 @@
-SELECT * FROM user u WHERE admin = 1;
+SELECT * FROM appointment u WHERE userid = `test4`;

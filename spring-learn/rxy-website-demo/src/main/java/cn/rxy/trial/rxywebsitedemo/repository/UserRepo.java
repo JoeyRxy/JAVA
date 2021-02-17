@@ -1,5 +1,7 @@
 package cn.rxy.trial.rxywebsitedemo.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +16,16 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     Page<User> findAll(Pageable pageable);
 
-    Page<User> findAllByAdminFalse(Pageable pageble);
+    Page<User> findAllByAdminFalse(Pageable pageable);
 
+    long countByAdminFalse();
+
+    List<User> findAllByUsernameContainingAndAdminFalse(String usernamePart);
+
+    List<User> findAllByUsernameAndAdminFalse(String username);
+
+    List<User> findAllByUseridContainingAndAdminFalse(String useridPart);
+
+    User findByUseridAndAdminFalse(String userid);
+    
 }

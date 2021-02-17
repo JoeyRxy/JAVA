@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.,min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/main.js"></script>
@@ -18,10 +19,12 @@
                 data: JSON.stringify(data),
                 success: function (res) {
                     console.log(res);
-                    if (res !== null) {
-                        $('#userinfo').text(res["username"]);
-                        alert('Logged In!');
-                    }
+                    if (res !== null) 
+                        window.location.href = '/';
+                        alert('登陆成功！');
+                },
+                error: function() {
+                    alert('登陆失败，用户名或密码错误');
                 },
                 contentType: 'application/json;charset=utf-8',
                 dataType: 'json'
@@ -51,18 +54,25 @@
 
 <body>
     <nav th:insert="header::header"></nav>
+
     <div>
-        <input type="text" name="userid" id="userid">
-        <input type="password" name="password" id="password">
-        <button onclick="login();">Log In</button>
+        <label for="username"></label><input type="text" name="username" placeholder="用户id" id="userid">
+        <br>
+        <label for="password"></label><input type="password" name="password" placeholder="密码" id="password">
+        <br>
+        <button onclick="login();">登录</button>
     </div>
 
     <div>
-        <input type="text" name="username" id="username">
-        <input type="text" name="r_userid" id="r_userid">
-        <input type="password" name="r_password" id="r_password">
-        <button onclick="register();">Register</button>
+        <label for="o"></label><input type="text" name="o" placeholder="用户名" id="username">
+        <br>
+        <label for="username"></label><input type="text" name="username" placeholder="用户id" id="r_userid">
+        <br>
+        <label for="password"></label><input type="password" name="password" placeholder="密码" id="r_password">
+        <br>
+        <button onclick="register();">注册</button>
     </div>
+    
     <nav th:insert="footer::footer"></nav>
 </body>
 

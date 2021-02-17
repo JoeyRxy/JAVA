@@ -3,7 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.,min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Popup container - can be anything you want */
+        .popup {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+        
+        /* The actual popup */
+        .popup .popuptext {
+          visibility: hidden;
+          width: 160px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 8px 0;
+          position: absolute;
+          z-index: 1;
+          bottom: 125%;
+          left: 50%;
+          margin-left: -80px;
+        }
+        
+        /* Popup arrow */
+        .popup .popuptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: #555 transparent transparent transparent;
+        }
+        
+        /* Toggle this class - hide and show the popup */
+        .popup .show {
+          visibility: visible;
+          -webkit-animation: fadeIn 1s;
+          animation: fadeIn 1s;
+        }
+        
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+          from {opacity: 0;} 
+          to {opacity: 1;}
+        }
+        
+        @keyframes fadeIn {
+          from {opacity: 0;}
+          to {opacity:1 ;}
+        }
+    </style>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/main.js"></script>
@@ -12,8 +71,75 @@
 </head>
 <body>
     <nav th:insert="header::header"></nav>
-
     
+    <div>
+        <span class="header">查看：</span>
+        <label for="mode"></label><select class='select' name="mode" id="mode" onchange="window.location.href='/admin?mode=' + $(this).val();">
+        <option value="false" th:selected="${mode}==null or ${mode} == false">预约</option>
+        <option value="true" th:selected="${mode}">用户</option>
+        </select>
+        <button class="btn btn-primary"onclick="window.location.href='/admin?mode=' + $('#mode').val();">刷新</button>
+    </div>
+    <div th:hidden="${hidden}">
+        <label for="search"></label><select class="select" name="search" id="search">
+            <option value="false">通过名字</option>
+            <option value="true">通过id</option>
+        </select>
+        <input type="text" id="searchval">
+        <button class="btn btn-success" 
+        onclick='search($("#search").val()==="true", $("#searchval").val());'>
+        搜索
+        </button>
+    </div>
+    <div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr th:if="${mode}">
+                    <td>序号</td>
+                    <td>用户名</td>
+                    <td>用户id</td>
+                    <td>备注</td>
+                </tr>
+                <tr th:if="${mode}==null or ${mode} == false">
+                    <td>时间</td>
+                    <td th:each="time : ${times}">
+                        <span th:text="${time}"></span>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody th:if="${mode}" id='usertbl'>
+                <tr th:each="user : ${users}">
+                    <td th:text="${userStat.count}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.userid}"></td>
+                    <td th:text="${user.note}"></td>
+                </tr>
+            </tbody>
+
+            <tbody th:if="${mode}==null or ${mode} == false">
+                <tr th:each = "pair: ${appointmentPairs}">
+                    <td th:text="${pair.key}">Date</td>
+                    <td th:each="p: ${pair.val}">
+                        <div class="popup" 
+                            onmouseover="show(this);" 
+                            onmouseout="hide(this);"
+                        >
+                            <span th:text="${p.key}">userid</span>
+                            <span class="popuptext" th:text="${p.val}" th:id="'u' + ${pairStat.index} + '_' + ${pStat.index}">username</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div th:if="${mode}" id="navbar">
+            <a href="/admin?mode=true&page=0">第一页</a>
+            <a th:href="'/admin?mode=true&page=' + (${page} - 1)">上一页</a>
+            <span th:text="'第' + ${page} + '页'"></span>
+            <a th:href="'/admin?mode=true&page=' + (${page} + 1)">下一页</a>
+            <a href="/admin?mode=true&page=-2">最后一页</a>
+        </div>
+    </div>
     <nav th:insert="footer::footer"></nav>
 </body>
 </html>
